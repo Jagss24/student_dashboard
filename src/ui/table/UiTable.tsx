@@ -156,6 +156,27 @@ const UiTable = ({
           )}
         </table>
       </div>
+      <div className='flex justify-between items-center mt-4'>
+        <div className='text-sm text-gray-600'>
+          Page {table.getState().pagination.pageIndex + 1} of{' '}
+          {table.getPageCount()}
+        </div>
+
+        <div className='flex gap-2'>
+          <button
+            className='px-3 py-1 text-sm border rounded disabled:opacity-50'
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}>
+            Previous
+          </button>
+          <button
+            className='px-3 py-1 text-sm border rounded disabled:opacity-50'
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}>
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
