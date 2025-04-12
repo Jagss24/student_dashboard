@@ -44,7 +44,6 @@ type UiTableBaseProps = {
   }[];
 };
 const UiTable = ({
-  // deleteEntries,
   dataSet,
   columnsSchema,
   query,
@@ -53,18 +52,12 @@ const UiTable = ({
   searchPlaceHolder = 'Type to search...',
   maxHeightClassName = 'max-h-[calc(100vh-340px)]',
   actionButtonComponent,
-}: // filterDropownOptions,
-// filterType = 'singleSelect',
-UiTableBaseProps) => {
+}: UiTableBaseProps) => {
   //   STATE/s
   const [columnVisibility, setColumnVisibility] = useState({});
   // const [zoomTable, setZoomTable] = useState(false);
   const [filterState, setFilterState] = useState('');
   const [columnOrder, setColumnOrder] = useState<ColumnOrderState>([]);
-
-  // // CUSTOM HOOK/s
-  // const { urlQueries, navigate, navigateTo, activeRoutes } =
-  //   useGlobalRouteHandler();
 
   // VARIABLES
   const tableData = useMemo(() => dataSet ?? [], [dataSet]);
@@ -142,37 +135,6 @@ UiTableBaseProps) => {
         </div>
 
         <div className='flex items-center self-end gap-2'>
-          {/* {filterDropownOptions && filterDropownOptions?.length > 0 && (
-            <FilterTableDropdown
-              options={filterDropownOptions}
-              filterType={filterType}
-            />
-          )} */}
-          {/* <UiButton
-            disabled={dataRefetchLoading}
-            icon={
-              <RefreshCcw
-                className={`size-4 text-body ${
-                  dataRefetchLoading ? 'animate-spin' : ''
-                }`}
-              />
-            }
-            className='h-8 px-2 flex-row-reverse text-body '
-            text='Refresh'
-            buttonType='secondary'
-            onClick={() => {
-              dataSet.refetch?.();
-            }}
-          /> */}
-          {/* 
-          <ToggleColumnDropdown
-            icon={<EyeIcon className='size-5 text-body' />}
-            headText='Toggle displayed columns'
-            options={table.getAllLeafColumns()}
-            className='text-body flex-row-reverse h-8 px-2 '
-            setColumnOrder={table.setColumnOrder}
-          /> */}
-
           {actionButtonComponent || <></>}
         </div>
       </section>
@@ -191,7 +153,6 @@ UiTableBaseProps) => {
                     <TableCell
                       type='th'
                       key={header.id}
-                      // leftOffset={columnOffsets[header.id]}
                       dataColumnId={header.id}>
                       {flexRender(
                         header.column.columnDef.header,
@@ -227,7 +188,6 @@ UiTableBaseProps) => {
                       <TableCell
                         type='td'
                         key={cell.id}
-                        // leftOffset={columnOffsets[cell.column.id]}
                         dataColumnId={cell.column.id}>
                         {flexRender(
                           cell.column.columnDef.cell,

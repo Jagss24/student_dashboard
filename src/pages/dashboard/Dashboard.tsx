@@ -139,11 +139,15 @@ const Dashboard = () => {
         columnsSchema={columnDef}
         dataSet={filteredData}
         actionButtonComponent={
-          <UiButton
-            text='Add Student'
-            className='px-4 h-9 flex flex-row-reverse'
-            icon={<Plus className='size-4' />}
-          />
+          isAdmin ? (
+            <UiButton
+              text='Add Student'
+              className='px-4 h-9 flex flex-row-reverse'
+              icon={<Plus className='size-4' />}
+            />
+          ) : (
+            <></>
+          )
         }
         maxHeightClassName='h-[calc(100vh-20vh)]'
       />

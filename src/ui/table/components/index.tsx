@@ -21,7 +21,6 @@ const TableCell = ({
   type = 'td',
   children,
   className,
-  leftOffset, // Receive leftOffset as prop instead of calculating
   dataColumnId,
 }: {
   children: React.ReactNode;
@@ -39,11 +38,6 @@ const TableCell = ({
             ? 'font-semibold text-body bg-offWhite'
             : ' text-heading font-semibold bg-white'
         }`}
-      style={{
-        position: leftOffset !== undefined ? 'sticky' : '',
-        left: leftOffset !== undefined ? `${leftOffset - 0.2}px` : '',
-        zIndex: leftOffset !== undefined ? 1 : '',
-      }}
       data-column-id={dataColumnId}>
       {children}
     </Component>

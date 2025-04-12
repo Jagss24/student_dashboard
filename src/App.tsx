@@ -7,11 +7,11 @@ function App() {
   const location = useLocation();
   const { user } = useSelector((state: RootState) => state.auth);
 
-  // useEffect(() => {
-  //   if (!user && location.pathname !== '/login') {
-  //     window.location.href = '/login';
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (!user && location.pathname !== '/login') {
+      window.location.href = '/login';
+    }
+  }, [user]);
   return (
     <>
       <Outlet />
