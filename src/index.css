@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 41 91 255;
+    --color-secondary: 44 212 74;
+    --color-tertiary: 217 221 255;
+    --color-success: 46 125 50;
+    --color-error: 198 40 40;
+    --color-info: 255 152 0;
+    --color-warning: 255 111 0;
+  }
+
+  html {
+    font-size: 16px;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  *::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #deded0;
+    border-radius: 5px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #b6b7bb;
+    border-radius: 14px;
+  }
+
+  /* Hide scrollbars for Webkit browsers (Chrome, Safari) */
+  #hide-scrollbar::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Hide scrollbars for IE, Edge, and Firefox */
+  #hide-scrollbar {
+    -ms-overflow-style: none !important; /* IE and Edge */
+    scrollbar-width: none !important; /* Firefox */
+  }
+}
