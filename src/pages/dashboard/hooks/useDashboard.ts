@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { students } from '@/data/students_data.json';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store';
 
 type TBasicObj = { name: string; value: string };
 export const useDashboard = () => {
@@ -11,7 +12,7 @@ export const useDashboard = () => {
     from: '',
     to: '',
   });
-
+  const { students } = useSelector((state: RootState) => state.students);
   const [addStudentModal, setAddStudentModal] = useState(false);
 
   const filteredData = useMemo(() => {
@@ -32,7 +33,6 @@ export const useDashboard = () => {
       return matchesClass && matchesSection && matchesRange;
     });
   }, [students, selectedClass, selectedSection, attendanceRange]);
-
   return {
     states: {
       filteredData,

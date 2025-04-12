@@ -1,4 +1,4 @@
-import { IStudent } from '@/features/students/studentSlice';
+import { deleteStudent, IStudent } from '@/features/students/studentSlice';
 import UiCheckbox from '@/ui/checkbox/UiCheckBox';
 import UiTable from '@/ui/table/UiTable';
 import UiPageWrapper from '@/ui/UIPageWrapper';
@@ -10,11 +10,14 @@ import { useDashboard } from './hooks/useDashboard';
 import UiSelector from '@/ui/selectore/UiSelector';
 import { students } from '@/data/students_data.json';
 import AddStudent from './components/AddStudent';
+import { useDispatch } from 'react-redux';
 
 const Dashboard = () => {
   const {
     states: { isAdmin },
   } = useCheckPermissions();
+
+  const dispatch = useDispatch();
 
   const {
     states: { selectedClass, selectedSection, filteredData, addStudentModal },
@@ -76,13 +79,13 @@ const Dashboard = () => {
     columnDef.push({
       header: 'Actions',
       cell: (cell) => {
-        const rowData = cell.row.original.id;
+        const id = cell.row.original.id;
         return (
           <UiButton
             className='w-6 h-6 bg-error/10 text-error'
             icon={<Trash className='size-4' />}
             onClick={() => {
-              console.log({ rowData });
+              dispatch(deleteStudent(id));
             }}
           />
         );
@@ -103,7 +106,7 @@ const Dashboard = () => {
     name: eachSection,
     value: eachSection,
   }));
-
+  console.log({ filteredData });
   return (
     <UiPageWrapper className='p-4'>
       <div className='border border-offWhite rounded w-full p-2 flex flex-col gap-4'>
