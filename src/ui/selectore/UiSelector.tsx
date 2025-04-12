@@ -14,17 +14,8 @@ type TSelectorProps<T> = {
   className?: string;
   accessorKey?: string;
   disabled?: boolean;
-  error?: any;
-  textEllipsis?: number;
   onChange: (option: T) => void;
-  isRequired?: boolean;
-  supportAnchor?: boolean;
-  isLoading?: boolean;
-  key?: string | number;
   containerClass?: string;
-  emptyText?: string;
-  settingUrl?: string;
-  settingActionText?: string;
 };
 export default function UiSelector<T extends Record<string, any>>({
   placeholder = 'Select any option',
@@ -32,7 +23,6 @@ export default function UiSelector<T extends Record<string, any>>({
   value,
   onChange,
   options,
-  error,
   disabled = false,
   className = '',
   accessorKey = 'name',
@@ -51,17 +41,14 @@ export default function UiSelector<T extends Record<string, any>>({
           flex items-center justify-between text-body font-semibold pl-2 pr-1 ${className}
        disabled:cursor-not-allowed disabled:opacity-70 disabled:bg-extraLightGray/30 `}>
               <span
-                data-error={error?.message ? true : false}
                 className={`text-sm  ${
                   value?.[accessorKey]
                     ? 'text-subHeading font-semibold'
-                    : 'text-darkGray/80 data-[error=true]:text-error/70 font-medium'
+                    : 'text-darkGray/80 font-medium'
                 }`}>
                 {value?.[accessorKey] || placeholder}
               </span>
-              <span
-                data-error={error?.message ? true : false}
-                className='text-gray data-[error=true]:text-error/70'>
+              <span className='text-gray'>
                 <ChevronsUpDownIcon className='h-5 w-5' aria-hidden='true' />
               </span>
             </ListboxButton>

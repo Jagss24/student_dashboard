@@ -12,6 +12,8 @@ export const useDashboard = () => {
     to: '',
   });
 
+  const [addStudentModal, setAddStudentModal] = useState(false);
+
   const filteredData = useMemo(() => {
     return students.filter((item) => {
       const matchesClass = selectedClass
@@ -32,7 +34,18 @@ export const useDashboard = () => {
   }, [students, selectedClass, selectedSection, attendanceRange]);
 
   return {
-    states: { filteredData, selectedClass, selectedSection, attendanceRange },
-    setStates: { setSelectedClass, setSelectedSection, setAttendanceRange },
+    states: {
+      filteredData,
+      selectedClass,
+      selectedSection,
+      attendanceRange,
+      addStudentModal,
+    },
+    setStates: {
+      setSelectedClass,
+      setSelectedSection,
+      setAttendanceRange,
+      setAddStudentModal,
+    },
   };
 };

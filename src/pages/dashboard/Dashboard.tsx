@@ -9,6 +9,7 @@ import { useCheckPermissions } from '@/services/useCheckPermissions';
 import { useDashboard } from './hooks/useDashboard';
 import UiSelector from '@/ui/selectore/UiSelector';
 import { students } from '@/data/students_data.json';
+import AddStudent from './components/AddStudent';
 
 const Dashboard = () => {
   const {
@@ -16,8 +17,8 @@ const Dashboard = () => {
   } = useCheckPermissions();
 
   const {
-    states: { selectedClass, selectedSection, filteredData },
-    setStates: { setSelectedClass, setSelectedSection },
+    states: { selectedClass, selectedSection, filteredData, addStudentModal },
+    setStates: { setSelectedClass, setSelectedSection, setAddStudentModal },
   } = useDashboard();
   const columnDef: ColumnDef<IStudent>[] = [
     {
@@ -78,7 +79,6 @@ const Dashboard = () => {
         const rowData = cell.row.original.id;
         return (
           <UiButton
-            buttonType='tertiary'
             className='w-6 h-6 bg-error/10 text-error'
             icon={<Trash className='size-4' />}
             onClick={() => {
@@ -105,7 +105,7 @@ const Dashboard = () => {
   }));
 
   return (
-    <UiPageWrapper className='p-4 '>
+    <UiPageWrapper className='p-4'>
       <div className='border border-offWhite rounded w-full p-2 flex flex-col gap-4'>
         <h3 className='text-heading text-md flex items-center gap-2'>
           <Funnel className='size-4' />
@@ -142,8 +142,9 @@ const Dashboard = () => {
           isAdmin ? (
             <UiButton
               text='Add Student'
-              className='px-4 h-9 flex flex-row-reverse'
+              className='px-4 h-9 flex flex-row-reverse bg-uiBlue text-white'
               icon={<Plus className='size-4' />}
+              onClick={() => setAddStudentModal(true)}
             />
           ) : (
             <></>
@@ -151,6 +152,12 @@ const Dashboard = () => {
         }
         maxHeightClassName='h-[calc(100vh-20vh)]'
       />
+      {addStudentModal && (
+        <AddStudent
+          isOpen={addStudentModal}
+          handleClose={() => setAddStudentModal(false)}
+        />
+      )}
     </UiPageWrapper>
   );
 };
