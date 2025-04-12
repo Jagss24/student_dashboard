@@ -106,7 +106,7 @@ const Dashboard = () => {
     name: eachSection,
     value: eachSection,
   }));
-  console.log({ filteredData });
+
   return (
     <UiPageWrapper className='p-4'>
       <div className='border border-offWhite rounded w-full p-2 flex flex-col gap-4'>

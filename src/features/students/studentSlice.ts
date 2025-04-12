@@ -25,7 +25,7 @@ const studentSlice = createSlice({
   reducers: {
     addStudent: (state, action: PayloadAction<Omit<IStudent, 'id'>>) => {
       const newStudentId = state.students[students.length - 1]?.id + 1;
-      state.students.push({ id: newStudentId, ...action.payload });
+      state.students.unshift({ id: newStudentId, ...action.payload });
     },
     deleteStudent: (state, action: PayloadAction<number>) => {
       state.students = state.students.filter((s) => s.id !== action.payload);

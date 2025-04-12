@@ -1,7 +1,9 @@
+import { addStudent } from '@/features/students/studentSlice';
 import UiTextInputBase from '@/ui/inputs/UiTextInputBase';
 import UiModalContainer from '@/ui/modal/UiModal';
 import UiButton from '@/ui/UiButton';
 import { ArrowRight, User } from 'lucide-react';
+import { useDispatch } from 'react-redux';
 
 const AddStudent = ({
   handleClose,
@@ -10,6 +12,7 @@ const AddStudent = ({
   handleClose: () => void;
   isOpen: boolean;
 }) => {
+  const dispatch = useDispatch();
   return (
     <UiModalContainer
       handleCloseModal={handleClose}
@@ -28,12 +31,34 @@ const AddStudent = ({
         </div>
       }>
       <form
-        // onSubmit={formMethods.handleSubmit(formSubmitHandler)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          const formElement = e.target as HTMLFormElement;
+          const formData = new FormData(formElement);
+          const name = formData.get('name') as string;
+          const rollNumber = formData.get('roll_number') as string;
+          dispatch(
+            addStudent({
+              name,
+              roll_number: rollNumber,
+              class: '10th',
+              section: 'B',
+              marks: { english: 81, maths: 80, science: 90 },
+              attendance: 55,
+            })
+          );
+          handleClose();
+        }}
         className='flex flex-col gap-4 w-[500px]'>
         <UiTextInputBase
           name='name'
           label='Name'
           placeholder='Eg: Rohan Shetty'
+        />
+        <UiTextInputBase
+          name='roll_number'
+          label='Roll Number'
+          placeholder='Eg: S0101'
         />
 
         <section className='flex items-center gap-2 mt-2'>
